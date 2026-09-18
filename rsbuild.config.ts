@@ -19,6 +19,7 @@ const APP_VARS = [
     // Backend configuration
     'REACT_APP_BACKEND',
     'REACT_APP_META_BACKEND',
+    'REACT_APP_USE_META_REDIRECT',
     'META_YDB_BACKEND',
 ];
 

@@ -6,8 +6,12 @@ import axiosRetry from 'axios-retry';
 import {backend as BACKEND, clusterName} from '../../store';
 import {readSettingValueFromLS} from '../../store/reducers/settings/utils';
 import type {SchemaPathParam} from '../../types/api/common';
+import {uiFactory} from '../../uiFactory/uiFactory';
 import {DEV_ENABLE_TRACING_FOR_ALL_REQUESTS} from '../../utils/constants';
-import {prepareBackendWithMetaProxy} from '../../utils/parseBalancer';
+import {
+    prepareBackendWithMetaProxy,
+    prepareBackendWithMetaRedirect,
+} from '../../utils/parseBalancer';
 import {isRedirectToAuth} from '../../utils/response';
 
 import {isNeedResetResponse, processNeedReset} from './utils/needReset';
@@ -280,7 +284,10 @@ export class BaseYdbAPI extends AxiosWrapper {
         const resolvedClusterName = noCluster ? undefined : clusterNameOverride || clusterName;
 
         if (resolvedClusterName) {
-            resolvedPath = prepareBackendWithMetaProxy({clusterName: resolvedClusterName}) + path;
+            const prepareBackend = uiFactory.useMetaRedirect
+                ? prepareBackendWithMetaRedirect
+                : prepareBackendWithMetaProxy;
+            resolvedPath = prepareBackend({clusterName: resolvedClusterName}) + path;
         } else {
             resolvedPath = `${BACKEND ?? ''}${path}`;
         }

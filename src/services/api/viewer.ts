@@ -53,7 +53,7 @@ export class ViewerAPI extends BaseYdbAPI {
 
     getClusterInfo(clusterName?: string, {concurrentId, signal}: AxiosOptions = {}) {
         return this.get<TClusterInfo>(
-            this.getPath('/viewer/json/cluster'),
+            this.getPath('/viewer/json/cluster', clusterName),
             {
                 name: clusterName,
                 tablets: true,
@@ -87,7 +87,7 @@ export class ViewerAPI extends BaseYdbAPI {
         {concurrentId, signal}: AxiosOptions = {},
     ) {
         return this.get<TTenantInfo>(
-            this.getPath('/viewer/json/tenantinfo'),
+            this.getPath('/viewer/json/tenantinfo', clusterName),
             {
                 tablets: false,
                 storage,

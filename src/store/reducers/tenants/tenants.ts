@@ -1,4 +1,5 @@
 import type {TTenantInfo} from '../../../types/api/tenant';
+import {uiFactory} from '../../../uiFactory/uiFactory';
 import {api} from '../api';
 import {DATABASE_DATA_LIST_TAG} from '../entityDataTags';
 
@@ -23,7 +24,10 @@ export const tenantsApi = api.injectEndpoints({
                 try {
                     let response: TTenantInfo;
 
-                    if (isMetaDatabasesAvailable && window.api.meta) {
+                    if (uiFactory.useMetaRedirect) {
+                        // Viewer checks the user's access to each database through OIDC.
+                        response = await window.api.viewer.getTenants({clusterName}, {signal});
+                    } else if (isMetaDatabasesAvailable && window.api.meta) {
                         response = await window.api.meta.getTenantsV2(
                             {clusterName, environmentName},
                             {signal},

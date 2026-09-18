@@ -11,6 +11,7 @@ import './styles/index.scss';
 
 configureZod();
 configureUIFactory({
+    useMetaRedirect: process.env.REACT_APP_USE_META_REDIRECT === 'true',
     hideNewFeaturesNotifications: {
         navigationV2: true,
     },

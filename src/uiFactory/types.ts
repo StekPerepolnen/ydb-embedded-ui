@@ -82,6 +82,8 @@ export interface UIFactory<H extends string = CommonIssueCategory, T extends str
     emMetaAvailable?: boolean;
 
     useMetaProxy?: boolean;
+    /** Use /clusters/<name>/ redirects and omit backend from generated cluster/database links. */
+    useMetaRedirect?: boolean;
     useClusterDomain?: boolean;
     clustersDomain?: string;
 
