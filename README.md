@@ -94,7 +94,7 @@ META_YDB_BACKEND=undefined
 
 #### Short cluster links with Meta redirects
 
-If Meta supports `/clusters/<cluster_name>/<path>`, set
+If Meta supports `/cluster/<cluster_name>/<path>`, set
 `REACT_APP_USE_META_REDIRECT=true`. Cluster and database links then use
 `clusterName` without a `backend` URL. API requests go to Meta, which returns
 an HTTP redirect to the cluster's OIDC proxy. Existing links with an explicit
@@ -112,7 +112,7 @@ REACT_APP_USE_META_REDIRECT=true npm start
 ```
 
 A page link looks like `/node/25/storage?clusterName=testing-global`.
-An API request looks like `/meta/clusters/testing-global/viewer/json/nodes`.
+An API request looks like `/meta/cluster/testing-global/viewer/json/nodes`.
 The database list is read from the cluster's `tenantinfo` endpoint using the
 user's OIDC session, so cluster access rules still apply. Cluster requests
 require the redirect handler to be deployed in Meta.

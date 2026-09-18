@@ -85,7 +85,7 @@ export function prepareBackendWithMetaRedirect({clusterName}: {clusterName?: str
         return undefined;
     }
 
-    return prepareBackendFromBalancer(`/clusters/${encodeURIComponent(clusterName)}`);
+    return prepareBackendFromBalancer(`/cluster/${encodeURIComponent(clusterName)}`);
 }
 
 export function prepareBackendWithMetaProxy({clusterName}: {clusterName?: string}) {
